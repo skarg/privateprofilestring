@@ -1,27 +1,30 @@
-/*********************************************************************
-*
-* Copyright (C) 1997-2004 Steve Karg
-*
-* Permission is hereby granted, free of charge, to any person obtaining
-* a copy of this software and associated documentation files (the
-* "Software"), to deal in the Software without restriction, including
-* without limitation the rights to use, copy, modify, merge, publish,
-* distribute, sublicense, and/or sell copies of the Software, and to
-* permit persons to whom the Software is furnished to do so, subject to
-* the following conditions:
-*
-* The above copyright notice and this permission notice shall be included
-* in all copies or substantial portions of the Software.
-*
-* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-*
-*********************************************************************/
+/**
+ * @file
+ * @author Steve Karg
+ * @date 1997-2004
+ * @brief  Reads or Writes a string to an INI file.
+ *
+ * @section LICENSE
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining
+ * a copy of this software and associated documentation files (the
+ * "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to
+ * the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+ * CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+ * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 
 /* includes */
 #include <stdio.h>
@@ -51,15 +54,15 @@
 /* constants for copy file */
 #define BLOCKSIZE 512
 typedef char DATA;
-/******************************************************************
-* DESCRIPTION:  Binary copy of one file to another
-* RETURN:       none
-* ALGORITHM:    none
-* NOTES:        none
-******************************************************************/
-void filecopy(
-  FILE *pDest, // destination file handle
-  FILE *pSource) // source file handle
+/**
+ * Binary copy of one file to another
+ *
+ * @param pDest - destination file handle
+ * @param pSource - source file handle
+ */
+static void filecopy(
+  FILE *pDest,
+  FILE *pSource)
 {
   DATA block[BLOCKSIZE] = {0}; /* holds data for file copy */
   int num_read = 0;  /* number of bytes read when copying file */
@@ -76,46 +79,46 @@ void filecopy(
   }
 }
 
-/******************************************************************
-* DESCRIPTION:  Writes a string to an INI file.
-* PARAMETERS:   pAppName (IN) Points to a null-terminated string
-*               containing the name of the section to which the
-*               string will be copied. If the section does not exist,
-*               it is created. The name of the section is case-independent;
-*               the string can be any combination of uppercase and
-*               lowercase letters.
-*               pKeyName (IN) Points to the null-terminated string
-*               containing the name of the key to be associated with
-*               a string. If the key does not exist in the specified
-*               section, it is created. If this parameter is NULL, the
-*               entire section, including all entries within the section,
-*               is deleted.
-*               pString (IN) Points to a null-terminated string to
-*               be written to the file. If this parameter is NULL, the
-*               key pointed to by the pKeyName parameter is deleted.
-*               Windows 95: This platform does not support the use
-*               of the TAB (\t) character as part of this parameter.
-*               pFileName (IN) Points to a null-terminated string
-*               that names the initialization file.
-* GLOBALS:      none
-* RETURN:       If the function successfully copies the string to
-*               the initialization file, the return value is nonzero.
-*               If the function fails, or if it flushes the cached
-*               version of the most recently accessed initialization
-*               file, the return value is zero. To get extended
-*               error information, call GetLastError.
-* ALGORITHM:    none
-* NOTES:        If all three parameters are NULL, the function
-*               flushes the cache. The function always returns FALSE
-*               after flushing the cache, regardless of whether the
-*               flush succeeds or fails.
-*               Win32 replacement function
-******************************************************************/
+/**
+ * Writes a string to an INI file.
+ * If all three parameters are NULL, the function
+ * flushes the cache. The function always returns FALSE
+ * after flushing the cache, regardless of whether the
+ * flush succeeds or fails.
+ * Win32 replacement function
+ *
+ * @param pAppName (IN) Points to a null-terminated string
+ *  containing the name of the section to which the
+ *  string will be copied. If the section does not exist,
+ *  it is created. The name of the section is case-independent;
+ *  the string can be any combination of uppercase and
+ *  lowercase letters.
+ * @param pKeyName (IN) Points to the null-terminated string
+ *  containing the name of the key to be associated with
+ *  a string. If the key does not exist in the specified
+ *  section, it is created. If this parameter is NULL, the
+ *  entire section, including all entries within the section,
+ *  is deleted.
+ * @param pString (IN) Points to a null-terminated string to
+ *  be written to the file. If this parameter is NULL, the
+ *  key pointed to by the pKeyName parameter is deleted.
+ *  Windows 95: This platform does not support the use
+ *  of the TAB (\t) character as part of this parameter.
+ * @param pFileName (IN) Points to a null-terminated string
+ *  that names the initialization file.
+ *
+ * @return If the function successfully copies the string to
+ *  the initialization file, the return value is nonzero.
+ *  If the function fails, or if it flushes the cached
+ *  version of the most recently accessed initialization
+ *  file, the return value is zero. To get extended
+ *  error information, call GetLastError.
+ **/
 BOOL WritePrivateProfileString(
-    const char *pAppName,	// pointer to section name
-    const char *pKeyName,	// pointer to key name
-    const char *pString,	// pointer to string to add
-    const char *pFileName) // pointer to initialization filename
+    const char *pAppName,
+    const char *pKeyName,
+    const char *pString,
+    const char *pFileName)
 {
   FILE *pFile; /* stream handle */
   FILE *pTempFile; /* stream handle */
@@ -277,92 +280,97 @@ BOOL WritePrivateProfileString(
   return (status);
 }
 
-/******************************************************************
-* DESCRIPTION:  Processes the INI file.
-* PARAMETERS:   pAppName (IN) Points to a null-terminated string
-*                 that specifies the section containing the key name.
-*                 If this parameter is NULL, the GetPrivateProfileString
-*                 function copies all section names in the file to the
-*                 supplied buffer.
-*               pKeyName (IN) Pointer to the null-terminated string
-*                 containing the key name whose associated string is
-*                 to be retrieved. If this parameter is NULL, all key
-*                 names in the section specified by the lpAppName
-*                 parameter are copied to the buffer specified by
-*                 the pReturnedString parameter.
-*               pDefault (IN) Pointer to a null-terminated default
-*                 string. If the pKeyName key cannot be found in the
-*                 initialization file, GetPrivateProfileString copies
-*                 the default string to the pReturnedString buffer.
-*                 This parameter cannot be NULL. Avoid specifying a
-*                 default string with trailing blank characters.
-*                 The function inserts a null character in the
-*                 pReturnedString buffer to strip any trailing blanks.
-*               pReturnedString (OUT) Pointer to the buffer that
-*                 receives the retrieved string.
-*               nSize (IN) Specifies the size, in characters, of the
-*                 buffer pointed to by the pReturnedString parameter.
-*               pFileName (IN) Pointer to a null-terminated string
-*                 that names the initialization file. If this parameter
-*                 does not contain a full path to the file, Windows
-*                 searches for the file in the Windows directory.
-* GLOBALS:      none
-* RETURN:       If the function succeeds, the return value is the
-*               number of characters copied to the buffer, not
-*               including the terminating null character.
-*               If neither pAppName nor pKeyName is NULL and the
-*               supplied destination buffer is too small to hold the
-*               requested string, the string is truncated and followed
-*               by a null character, and the return value is equal
-*               to nSize minus one.
-*               If either pAppName or pKeyName is NULL and the
-*               supplied destination buffer is too small to hold
-*               all the strings, the last string is truncated and
-*               followed by two null characters. In this case,
-*               the return value is equal to nSize minus two.
-* ALGORITHM:    none
-* NOTES:        The GetPrivateProfileString function searches the
-*               specified initialization file for a key that matches
-*               the name specified by the pKeyName parameter under
-*               the section heading specified by the pAppName parameter.
-*               If it finds the key, the function copies the
-*               corresponding string to the buffer. If the key does
-*               not exist, the function copies the default character
-*               string specified by the pDefault parameter. A section
-*               in the initialization file must have the following form:
-*                [section]
-*                key=string
-*                .
-*                .
-*                .
-*               If pAppName is NULL, GetPrivateProfileString copies
-*               all section names in the specified file to the supplied
-*               buffer.
-*               If pKeyName is NULL, the function copies all
-*               key names in the specified section to the supplied
-*               buffer. An application can use this method to enumerate
-*               all of the sections and keys in a file. In either case,
-*               each string is followed by a null character and the
-*               final string is followed by a second null character.
-*               If the supplied destination buffer is too small to hold
-*               all the strings, the last string is truncated and
-*               followed by two null characters.
-*               If the string associated with pKeyName is enclosed
-*               in single or double quotation marks, the marks are
-*               discarded when the GetPrivateProfileString function
-*               retrieves the string.
-*               The GetPrivateProfileString function is not case-sensitive;
-*               the strings can be a combination of uppercase and
-*               lowercase letters.
-*               Win32 replacement function
-******************************************************************/
+/**
+ * Processes the INI file.
+ * Win32 replacement function
+ *
+ * @param pAppName (IN) Points to a null-terminated string
+ *  that specifies the section containing the key name.
+ *  If this parameter is NULL, the GetPrivateProfileString
+ *  function copies all section names in the file to the
+ *  supplied buffer.
+ * @param pKeyName (IN) Pointer to the null-terminated string
+ *  containing the key name whose associated string is
+ *  to be retrieved. If this parameter is NULL, all key
+ *  names in the section specified by the lpAppName
+ *  parameter are copied to the buffer specified by
+ *  the pReturnedString parameter.
+ * @param pDefault (IN) Pointer to a null-terminated default
+ *  string. If the pKeyName key cannot be found in the
+ *  initialization file, GetPrivateProfileString copies
+ *  the default string to the pReturnedString buffer.
+ *  This parameter cannot be NULL. Avoid specifying a
+ *  default string with trailing blank characters.
+ *  The function inserts a null character in the
+ *  pReturnedString buffer to strip any trailing blanks.
+ * @param pReturnedString (OUT) Pointer to the buffer that
+ *  receives the retrieved string.
+ * @param nSize (IN) Specifies the size, in characters, of the
+ *  buffer pointed to by the pReturnedString parameter.
+ * @param pFileName (IN) Pointer to a null-terminated string
+ *  that names the initialization file. If this parameter
+ *  does not contain a full path to the file, Windows
+ *  searches for the file in the Windows directory.
+ *
+ * @return If the function succeeds, the return value is the
+ *   number of characters copied to the buffer, not
+ *   including the terminating null character.
+ *   If neither pAppName nor pKeyName is NULL and the
+ *   supplied destination buffer is too small to hold the
+ *   requested string, the string is truncated and followed
+ *   by a null character, and the return value is equal
+ *   to nSize minus one.
+ *   If either pAppName or pKeyName is NULL and the
+ *   supplied destination buffer is too small to hold
+ *   all the strings, the last string is truncated and
+ *   followed by two null characters. In this case,
+ *   the return value is equal to nSize minus two.
+ *
+ * @section DESCRIPTION
+ *
+ * The GetPrivateProfileString function searches the
+ * specified initialization file for a key that matches
+ * the name specified by the pKeyName parameter under
+ * the section heading specified by the pAppName parameter.
+ * If it finds the key, the function copies the
+ * corresponding string to the buffer. If the key does
+ * not exist, the function copies the default character
+ * string specified by the pDefault parameter. A section
+ * in the initialization file must have the following form:
+ * {@code
+ *  [section]
+ *  key=string
+ *  .
+ *  .
+ *  .
+ * }
+ * If pAppName is NULL, GetPrivateProfileString copies
+ * all section names in the specified file to the supplied
+ * buffer.
+ * If pKeyName is NULL, the function copies all
+ * key names in the specified section to the supplied
+ * buffer. An application can use this method to enumerate
+ * all of the sections and keys in a file. In either case,
+ * each string is followed by a null character and the
+ * final string is followed by a second null character.
+ * If the supplied destination buffer is too small to hold
+ * all the strings, the last string is truncated and
+ * followed by two null characters.
+ * If the string associated with pKeyName is enclosed
+ * in single or double quotation marks, the marks are
+ * discarded when the GetPrivateProfileString function
+ * retrieves the string.
+ * The GetPrivateProfileString function is not case-sensitive;
+ * the strings can be a combination of uppercase and
+ * lowercase letters.
+ ******************************************************************/
 size_t GetPrivateProfileString(
-    const char *pAppName,	// points to section name
-    const char *pKeyName,	// points to key name
-    const char *pDefault,	// points to default string
-    char *pReturnedString,	// points to destination buffer
-    size_t nSize,	// size of destination buffer
-    const char *pFileName)	// points to initialization filename
+    const char *pAppName,
+    const char *pKeyName,
+    const char *pDefault,
+    char *pReturnedString,
+    size_t nSize,
+    const char *pFileName)
 {
   size_t count = 0; /* number of characters placed into return string */
   size_t len = 0; /* length of string */
@@ -555,6 +563,15 @@ size_t GetPrivateProfileString(
 }
 
 #ifdef TEST
+/**
+* Unit Test for the WritePrivateProfileString function
+*
+* @param pTest - test tracking pointer
+* @param app_name - applicaiton name
+* @param key_name - name of key to write a value
+* @param string_name - string to write
+* @param file_name - name of INI file
+*/
 static void TestWritePrivateProfileString(
   Test* pTest,
   char *app_name,
@@ -590,6 +607,15 @@ static void TestWritePrivateProfileString(
   return;
 }
 
+/**
+* Unit Test for the GetPrivateProfileString function
+*
+* @param pTest - test tracking pointer
+* @param app_name - applicaiton name
+* @param key_name - name of key to read a value
+* @param string_name - string to store value of the key
+* @param file_name - name of INI file
+*/
 static void TestGetPrivateProfileString(
   Test* pTest,
   char *app_name,
@@ -615,7 +641,11 @@ static void TestGetPrivateProfileString(
   return;
 }
 
-/* test Write/Get functionality */
+/**
+* Unit Tests for the Get/Write PrivateProfileString functions
+*
+* @param pTest - test tracking pointer
+*/
 void test_PrivateProfileString(Test* pTest)
 {
   char app_name[MAX_LINE_LEN] = {"Joshua"};
@@ -729,7 +759,11 @@ void test_PrivateProfileString(Test* pTest)
   return;
 }
 
-/* test Write/Get functionality */
+/**
+* Unit Tests for the Write PrivateProfileString functions
+*
+* @param pTest - test tracking pointer
+*/
 void test_PrivateProfileStringWrite(Test* pTest)
 {
   char file_name[MAX_LINE_LEN] = {"test2.ini"};
@@ -794,7 +828,11 @@ void test_PrivateProfileStringWrite(Test* pTest)
   return;
 }
 
-/* test Erase of Section functionality */
+/**
+* Unit Tests for the Erase PrivateProfileString functionality
+*
+* @param pTest - test tracking pointer
+*/
 void test_PrivateProfileStringErase(Test* pTest)
 {
   char file_name[MAX_LINE_LEN] = {"test3.ini"};
@@ -843,6 +881,11 @@ void test_PrivateProfileStringErase(Test* pTest)
 #endif
 
 #ifdef TEST_PROFILE
+/**
+* Main program entry for Unit Test
+*
+* @return  returns 0 on success, and non-zero on fail.
+*/
 int main(void)
 {
   Test *pTest;
