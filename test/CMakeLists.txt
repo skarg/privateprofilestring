@@ -50,6 +50,7 @@ add_custom_command(TARGET lcov
 list(APPEND testdirs
     src/profile
     src/stptok
+    src/rmspace
 )
 
 enable_testing()
