@@ -1,0 +1,9 @@
+# ninja log v5
+0	24	1735003787723349065	src/profile/CMakeFiles/test_profile.dir/home/skarg/privateprofilestring/src/rmspace.c.o	4f2e82e38fabf665
+0	24	1735003787723349065	src/profile/CMakeFiles/test_profile.dir/home/skarg/privateprofilestring/src/stptok.c.o	926b00d1b688c6c7
+0	28	1735003787723349065	src/profile/CMakeFiles/test_profile.dir/home/skarg/privateprofilestring/src/profile.c.o	2de6c7e8cefebc06
+0	46	1735003858683203343	src/profile/CMakeFiles/test_profile.dir/src/main.c.o	443c625f0d6c5b88
+47	111	1735003858747815394	src/profile/test_profile	f748e04818cffba8
+0	2	0	CMakeFiles/lcov	76d6df522d1e20f7
+0	2	0	/home/skarg/privateprofilestring/test/build/CMakeFiles/lcov	76d6df522d1e20f7
+2	164	0	CMakeFiles/lcov.util	aa4b8383eb00843e
