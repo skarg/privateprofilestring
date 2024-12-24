@@ -406,7 +406,7 @@ size_t GetPrivateProfileString(
             len = strlen(line);
             if ((len + count + 2) < nSize)
             {
-              strcpy(pReturnedString,line,nSize);
+              strncpy(pReturnedString,line,nSize);
               len++; /* add null */
               pReturnedString += len;
               count += len;
