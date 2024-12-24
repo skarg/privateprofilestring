@@ -37,6 +37,7 @@ CPPCHECK_OPTIONS += --suppress=uselessAssignmentPtrArg
 CPPCHECK_OPTIONS += --addon=cert.py
 CPPCHECK_OPTIONS += --suppress=cert-MSC30-c
 CPPCHECK_OPTIONS += --suppress=cert-STR05-C
+CPPCHECK_OPTIONS += --suppress=cert-STR07-C
 CPPCHECK_OPTIONS += --suppress=cert-API01-C
 CPPCHECK_OPTIONS += --suppress=cert-MSC24-C
 CPPCHECK_OPTIONS += --suppress=cert-INT31-c

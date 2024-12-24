@@ -206,7 +206,7 @@ BOOL WritePrivateProfileString(
           /* search */
           else
           {
-            strncpy(copy_line,line, sizeof(copy_line)-1);
+            strncpy(copy_line,line,sizeof(copy_line)-1);
             (void)stptok(copy_line,token,sizeof(token),"=");
             rmtrail(token);
             if (strcmpi(token,pKeyName) == 0)
@@ -228,7 +228,7 @@ BOOL WritePrivateProfileString(
         /* look for section */
         else if (line[0] == '[')
         {
-          strncpy(copy_line,line, sizeof(copy_line)-1);
+          strncpy(copy_line,line,sizeof(copy_line)-1);
           if (rmbrackets(copy_line))
           {
             // it's my section!
@@ -406,7 +406,7 @@ size_t GetPrivateProfileString(
             len = strlen(line);
             if ((len + count + 2) < nSize)
             {
-              strncpy(pReturnedString,line,nSize);
+              strcpy(pReturnedString,line);
               len++; /* add null */
               pReturnedString += len;
               count += len;
@@ -476,7 +476,7 @@ size_t GetPrivateProfileString(
                 len = strlen(pLine);
                 if (len < nSize)
                 {
-                  strncpy(pReturnedString,pLine, nSize);
+                  strncpy(pReturnedString,pLine, len);
                 }
                 /* copy as much as we can, then truncate */
                 else
@@ -499,7 +499,7 @@ size_t GetPrivateProfileString(
             len = strlen(token);
             if ((len + count + 2) < nSize)
             {
-              strncpy(pReturnedString,token, nSize);
+              strcpy(pReturnedString,token);
               len++; /* add null */
               pReturnedString += len;
               count += len;
