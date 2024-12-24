@@ -23,10 +23,10 @@
 * @param file_name - name of INI file
 */
 static void TestWritePrivateProfileString(
-  char *app_name,
-  char *key_name,
-  char *string_name,
-  char *file_name)
+  const char *app_name,
+  const char *key_name,
+  const char *string_name,
+  const char *file_name)
 {
   char default_name[MAX_LINE_LEN] = {"123456789"};
   char return_name[MAX_LINE_LEN] = {""};
@@ -66,10 +66,10 @@ static void TestWritePrivateProfileString(
 * @param file_name - name of INI file
 */
 static void TestGetPrivateProfileString(
-  char *app_name,
-  char *key_name,
-  char *string_name,
-  char *file_name)
+  const char *app_name,
+  const char *key_name,
+  const char *string_name,
+  const char *file_name)
 {
   char default_name[MAX_LINE_LEN] = {"123456789"};
   char return_name[MAX_LINE_LEN] = {""};
@@ -94,7 +94,7 @@ static void TestGetPrivateProfileString(
 *
 * @param pTest - test tracking pointer
 */
-void test_PrivateProfileString(void)
+static void test_PrivateProfileString(void)
 {
   char app_name[MAX_LINE_LEN] = {"Joshua"};
   char key_name[MAX_LINE_LEN] = {"Anna"};
@@ -212,7 +212,7 @@ void test_PrivateProfileString(void)
 *
 * @param pTest - test tracking pointer
 */
-void test_PrivateProfileStringWrite(void)
+static void test_PrivateProfileStringWrite(void)
 {
   char file_name[MAX_LINE_LEN] = {"test2.ini"};
 
@@ -281,7 +281,7 @@ void test_PrivateProfileStringWrite(void)
 *
 * @param pTest - test tracking pointer
 */
-void test_PrivateProfileStringErase(void)
+static void test_PrivateProfileStringErase(void)
 {
   char file_name[MAX_LINE_LEN] = {"test3.ini"};
 

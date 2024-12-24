@@ -50,3 +50,7 @@ Backup*
 CMakeLists.txt.user
 /build/
 /_build/
+**/build/*
+**/_build/*
+/test/build/
+/cmake-build-*

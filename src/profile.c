@@ -213,7 +213,7 @@ BOOL WritePrivateProfileString(
             {
               status = TRUE;
               found = TRUE;
-              /* overrite the line that was read in or remove it by
+              /* overwrite the line that was read in or remove it by
                  not writing it out if pString is NULL */
               if (pString)
                 fprintf(pTempFile,"%s=%s\n",pKeyName,pString);

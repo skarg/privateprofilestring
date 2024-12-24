@@ -1,8 +1,0 @@
-/home/skarg/privateprofilestring/test/build/CMakeFiles/lcov.dir
-/home/skarg/privateprofilestring/test/build/CMakeFiles/test.dir
-/home/skarg/privateprofilestring/test/build/CMakeFiles/edit_cache.dir
-/home/skarg/privateprofilestring/test/build/CMakeFiles/rebuild_cache.dir
-/home/skarg/privateprofilestring/test/build/src/profile/CMakeFiles/test_profile.dir
-/home/skarg/privateprofilestring/test/build/src/profile/CMakeFiles/test.dir
-/home/skarg/privateprofilestring/test/build/src/profile/CMakeFiles/edit_cache.dir
-/home/skarg/privateprofilestring/test/build/src/profile/CMakeFiles/rebuild_cache.dir

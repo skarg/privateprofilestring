@@ -13,15 +13,10 @@
 extern "C" {
 #endif /* __cplusplus */
 
-    char *stptok(const char *s,
+    const char *stptok(const char *s,
         char *tok,
         size_t toklen,
         const char *brk);
-
-#ifdef TEST
-#include "ctest.h"
-    void testTokens(Test * pTest);
-#endif
 
 #ifdef __cplusplus
 }
